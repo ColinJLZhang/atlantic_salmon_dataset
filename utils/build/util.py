@@ -1,0 +1,16 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Date    : 2018-11-27 11:15:37
+# @Author  : mrobotor (colinzhang@applecore.cc)
+# @Link    : http://darklunar.ml
+# @Version : $Id$
+
+import os
+
+#按照顺序返回文件夹中的图像帧的绝对路径
+def getimgList(path):
+	imgL = [img for img in os.listdir(path) if os.path.splitext(img)[-1] == '.png' or '.jpg' ]
+	#获得列表顺序不一定是按照截取的帧名称排序现在进行排序,按照名字中的数字排序
+	imgL = sorted(imgL, key=lambda img: eval(re.search(r'\d+',img).group()))
+	imgL = [os.path.join(path,imgname) for imgname in imgL]
+	return imgL
